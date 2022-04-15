@@ -21,6 +21,10 @@ public class Car {
 		return available;
 	}
 
+	public void setAvailable(boolean available) {
+		this.available = available;
+	}
+
 	public void setOwners(List<String> owners) {
 		this.owners = owners;
 	}

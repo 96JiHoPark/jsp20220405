@@ -21,4 +21,15 @@
   	<!-- 단위 : 분(minutes) -->
   	<session-timeout>30</session-timeout>
   </session-config>
+  
+  <!-- 서블릿 설정 -->
+  <servlet>
+  	<servlet-name>S3Servlet03</servlet-name>
+  	<servlet-class>chap17.servlet3.S3Servlet03</servlet-class>
+  </servlet>
+  
+  <servlet-mapping>
+  	<servlet-name>S3Servlet03</servlet-name>
+  	<url-pattern>/s3/servlet03</url-pattern>
+  </servlet-mapping>
 </web-app>

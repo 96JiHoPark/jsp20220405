@@ -32,10 +32,6 @@ public class S14Servlet01 extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// database에서 records 가져오기
 		// 1. 연결설정
-		String host = "13.125.59.156";
-		String schema = "w3shools";
-		String id = "root";
-		String pw = "XDsQluLHy3tW";
 		
 		Connection con = null;
 		// 2. statement 객체 생성

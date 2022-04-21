@@ -12,6 +12,11 @@
 <title>Insert title here</title>
 </head>
 <body>
-
+	<h1>고객의 도시들</h1>
+	<ul>
+		<c:forEach begin="0" end="2" var="i">
+			<li>${cities[i] }</li>
+		</c:forEach>
+	</ul>
 </body>
 </html>

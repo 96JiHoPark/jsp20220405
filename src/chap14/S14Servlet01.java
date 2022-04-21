@@ -35,7 +35,7 @@ public class S14Servlet01 extends HttpServlet {
 		String host = "3.38.191.246";
 		String schema = "w3shools";
 		String id = "root";
-		String pw = "ZHeTAUjkPTo0";
+		String pw = "XDsQluLHy3tW";
 		
 		Connection con = null;
 		// 2. statement 객체 생성

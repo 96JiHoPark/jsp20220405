@@ -1,6 +1,7 @@
 package chap14;
 
 import java.io.IOException;
+import java.sql.Connection;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -31,6 +32,12 @@ public class S14Servlet01 extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// database에서 records 가져오기
 		// 1. 연결설정
+		String host = "3.38.191.246";
+		String schema = "w3shools";
+		String id = "root";
+		String pw = "ZHeTAUjkPTo0";
+		
+		Connection con = null;
 		// 2. statement 객체 생성
 		// 3. 쿼리 실행
 		// 4. 실행결과 정제

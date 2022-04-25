@@ -12,11 +12,10 @@
 <title>Insert title here</title>
 </head>
 <body>
-	<h1>고객의 도시들</h1>
-	<ul>
-		<c:forEach items="${cities }" var="city">
-			<li>${city }</li>
-		</c:forEach>
-	</ul>
+	<h1>${name }이 사는 나라는 ${country }이고 도시는 ${city }입니다</h1>
+	
+	<c:if test="${not empty postCode }">
+		<h2>우편번호 : ${postCode }</h2> <%-- Customers table의 PostalCode값 출력 --%>
+	</c:if>
 </body>
 </html>

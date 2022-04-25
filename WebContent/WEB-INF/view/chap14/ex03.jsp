@@ -12,11 +12,8 @@
 <title>Insert title here</title>
 </head>
 <body>
-	<h1>고객의 도시들</h1>
-	<ul>
-		<c:forEach items="${cities }" var="city">
-			<li>${city }</li>
-		</c:forEach>
-	</ul>
+	<h1>${customer.name }은 ${customer.country }, ${customer.city }에 삽니다.</h1>
+	
+	<h2>우편번호 : ${customer.postCode }</h2>
 </body>
 </html>

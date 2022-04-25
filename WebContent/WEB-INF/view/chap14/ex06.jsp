@@ -12,11 +12,23 @@
 <title>Insert title here</title>
 </head>
 <body>
-	<h1>고객의 도시들</h1>
-	<ul>
-		<c:forEach items="${cities }" var="city">
-			<li>${city }</li>
-		</c:forEach>
-	</ul>
+	<table class="table">
+		<thead>
+			<tr>
+				<th>FirstName</th>
+				<th>LastName</th>
+				<th>BirthDate</th>
+			</tr>
+		</thead>
+		<tbody>
+			<c:forEach items="${employees }" var="employee">
+				<tr>
+					<td>${employee.firstName }</td>
+					<td>${employee.lastName }</td>
+					<td>${employee.birthDate }</td>
+				</tr>
+			</c:forEach>
+		</tbody>
+	</table>
 </body>
 </html>

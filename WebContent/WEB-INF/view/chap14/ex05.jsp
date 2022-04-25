@@ -12,11 +12,36 @@
 <title>Insert title here</title>
 </head>
 <body>
-	<h1>고객의 도시들</h1>
-	<ul>
-		<c:forEach items="${cities }" var="city">
-			<li>${city }</li>
-		</c:forEach>
-	</ul>
+	<!-- .container>.row>.col -->
+	<div class="container">
+		<div class="row">
+			<div class="col">
+				<h1>고객 명단</h1>
+
+				<!-- table.table>thead>tr>th*4^^tbody -->
+				<table class="table">
+					<thead>
+						<tr>
+							<th>고객명</th>
+							<th>도시</th>
+							<th>나라</th>
+							<th>
+								<i class="fa-solid fa-signs-post"></i>
+							</th>
+						</tr>
+					</thead>
+					<tbody>
+						<c:forEach items="${customers }" var="customer">
+							<tr>
+								<td>${customer.name }</td>
+								<td>${customer.city }</td>
+								<td>${customer.country }</td>
+								<td>${customer.postCode }</td>
+							</tr>
+						</c:forEach>
+					</tbody>
+				</table>
+			</div>
+		</div>
 </body>
 </html>

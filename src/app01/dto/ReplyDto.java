@@ -2,10 +2,11 @@ package app01.dto;
 
 import java.time.LocalDateTime;
 
-public class BoardDto {
+public class ReplyDto {
+	
 	private int id;
-	private String title;
-	private String body;
+	private int boardId;
+	private String content;
 	private LocalDateTime inserted;
 	
 	public String getPrettyInserted()	{
@@ -18,7 +19,6 @@ public class BoardDto {
 			return inserted.toLocalDate().toString();
 		}
 	}
-
 	
 	public int getId() {
 		return id;
@@ -26,22 +26,23 @@ public class BoardDto {
 	public void setId(int id) {
 		this.id = id;
 	}
+	public int getBoardId() {
+		return boardId;
+	}
+	public void setBoardId(int boardId) {
+		this.boardId = boardId;
+	}
+	public String getContent() {
+		return content;
+	}
+	public void setContent(String content) {
+		this.content = content;
+	}
 	public LocalDateTime getInserted() {
 		return inserted;
 	}
 	public void setInserted(LocalDateTime inserted) {
 		this.inserted = inserted;
 	}
-	public String getTitle() {
-		return title;
-	}
-	public void setTitle(String title) {
-		this.title = title;
-	}
-	public String getBody() {
-		return body;
-	}
-	public void setBody(String body) {
-		this.body = body;
-	}
+	
 }

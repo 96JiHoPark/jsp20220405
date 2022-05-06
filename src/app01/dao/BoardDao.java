@@ -3,6 +3,7 @@ package app01.dao;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.sql.Timestamp;
 import java.time.LocalDateTime;
 import java.time.ZoneOffset;
@@ -24,7 +25,7 @@ public class BoardDao {
 		int result = 0;
 		// connection
 		// statment
-		try(PreparedStatement pstmt = con.prepareStatement(sql)){
+		try(PreparedStatement pstmt = con.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS)){
 			pstmt.setString(1, dto.getTitle());
 			pstmt.setString(2, dto.getBody());
 			
@@ -35,6 +36,15 @@ public class BoardDao {
 			
 			// execute query
 			result = pstmt.executeUpdate();
+			
+			// 자동 생성된 키 얻기
+			try (ResultSet rs = pstmt.getGeneratedKeys();) {
+				if (rs.next()) {
+//								System.out.println(rs.getInt(1));
+					dto.setId(rs.getInt(1));
+				}
+			}
+			
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
@@ -46,7 +56,10 @@ public class BoardDao {
 	public List<BoardDto> list(Connection con) {
 		List<BoardDto> list = new ArrayList<>();
 		
-		String sql = "SELECT id, title, inserted FROM Board ORDER BY id DESC";
+		String sql = "SELECT b.id, b.title, b.inserted, COUNT(r.id) numOfReply "
+				+ "FROM Board b LEFT JOIN Reply r ON b.id = r.board_id "
+				+ "GROUP BY b.id "
+				+ "ORDER BY b.id DESC";
 		
 		try(Statement stmt = con.createStatement();
 				ResultSet rs = stmt.executeQuery(sql);){
@@ -55,6 +68,7 @@ public class BoardDao {
 				board.setId(rs.getInt(1));
 				board.setTitle(rs.getString(2));
 				board.setInserted(rs.getTimestamp(3).toLocalDateTime());
+				board.setNumOfReply(rs.getInt(4));
 				
 				list.add(board);
 			}
@@ -65,9 +79,9 @@ public class BoardDao {
 	}
 
 	public BoardDto get(Connection con, int id) {
-		String sql = "SELECT id, title, body, inserted "
-				+ "FROM Board "
-				+ "WHERE id = ?";
+		String sql = "SELECT b.id, b.title, b.body, b.inserted, COUNT(r.id) numOfReply "
+				+ "FROM Board b LEFT JOIN Reply r ON b.id = r.board_id "
+				+ "WHERE b.id = ? ";
 		
 		try(PreparedStatement stmt = con.prepareStatement(sql);){
 			stmt.setInt(1, id);
@@ -79,6 +93,7 @@ public class BoardDao {
 					board.setTitle(rs.getString(2));
 					board.setBody(rs.getString(3));
 					board.setInserted(rs.getTimestamp(4).toLocalDateTime());
+					board.setNumOfReply(rs.getInt(5));
 					
 					return board;
 				}
@@ -112,18 +127,14 @@ public class BoardDao {
 		return false;
 	}
 
-	public boolean delete(Connection con, int id) {
+	public boolean delete(Connection con, int id) throws SQLException {
 		String sql = "DELETE FROM Board "
 				+ "WHERE id = ? ";
 				
-		try(PreparedStatement pstmt = con.prepareStatement(sql)){
-			pstmt.setInt(1, id);
+		PreparedStatement pstmt = con.prepareStatement(sql);
+		pstmt.setInt(1, id);
 			
-			int count = pstmt.executeUpdate();
-			return count == 1;
-		} catch(Exception e) {
-			e.printStackTrace();
-		}
-		return false;
+		int count = pstmt.executeUpdate();
+		return count == 1;
 	}
 }

@@ -67,8 +67,9 @@ public class BoardInsertServlet extends HttpServlet {
 		}
 		
 		// forward/redirect
-		String path = request.getContextPath() + "/board/insert";
+		String path = request.getContextPath() + "/board/get?id=" + dto.getId();
 		response.sendRedirect(path);
+		
 	}
 
 }
